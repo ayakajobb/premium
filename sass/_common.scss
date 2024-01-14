@@ -1,0 +1,321 @@
+@use './mixins' as *;
+
+*, *::before, *::after{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', 'ヒラギノ角ゴ ProN W3', 'ヒラギノ角ゴ W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif;
+}
+
+// header=========================================================================
+header {
+  position: fixed;
+  width: 200px;
+  height: 100vh;
+  background: #fff;
+  z-index: 80;
+
+  @include mq {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 75px;
+  }
+
+  // ロゴ
+  .logo {
+    display: block;
+    width: 80%;
+    margin: 40px 20px;
+    margin-bottom: 60px;
+
+    img {
+      width: 100%;
+    }
+
+    @include mq {
+      width: 150px;
+      margin: 25px 0;
+    }
+  }
+
+  //ナビゲーション
+  section {
+    margin: 20px;
+    height: 100%;
+
+    @include mq {
+      display: none;
+    }
+    
+    li {
+      list-style: none;
+      font-size: 14px;
+      margin-bottom: 20px;
+      
+      a {
+        text-decoration: none;
+        color: #000;
+      }
+    }
+
+    // SNS
+    .div_sns {
+      position: absolute;
+      bottom: 20px;
+
+      .ul_sns {
+        display: flex;
+
+        li {
+          width: 40px;
+          margin: auto;
+
+          a {
+            display: block;
+            
+          }
+
+          img {
+            display: block;
+            margin: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+//button
+.header_button {
+  display: none;
+}
+
+@include mq {
+  .header_button {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 75px;
+    height: 75px;
+    background-color: transparent;
+    border: none;
+    z-index: 200;
+
+    span {
+      display: block;
+      position: relative;
+      width: 24px;
+      height: 2px;
+      margin: 0 auto;
+      background: #000;
+
+      &::before {top: -8px;}
+      &::after {top: 8px;}
+      
+      &::before,&::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+      }
+    }  
+  }
+}
+//ナビゲーションが開いたとき
+body.open .header_button {
+  ::before,
+  ::after {
+    top: 0;
+  }
+
+  span{
+    transform: rotate(45deg);
+  }
+  
+  ::after {
+    transform: rotate(90deg);
+  }
+}
+
+.open {
+  header section {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+
+    .gnav {
+      margin-top: 20%;
+
+      li {
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+      }
+    }
+
+    .div_sns {
+      top: 600px;
+    }
+
+  }
+
+  .logo {
+    display: none;
+  }
+  mein {
+    display: none;
+  }
+}
+
+
+// main===========================================================================
+// メインビジュアル
+.mvframe {
+  margin-left: 200px;
+  z-index: 10;
+
+  @include mq {
+    margin:0;
+  }
+}
+
+.mainv {  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: url(../img/mv-bg@2x.jpg) no-repeat center center /cover;
+  height: 100vh;
+
+  @include mq {
+    height: calc(100vh - 60px);
+    top: 75px;
+  }
+
+  img {      
+    height: 75%;
+
+    @include mq {
+      height: 65%;
+    }
+  }
+
+  .mvtext {
+    position: absolute;
+    bottom: 5vh;
+    left: 5vh;
+
+    time {
+      display: inline-block;
+      font-size: 1rem;
+      padding:.2em 0;
+
+      span {
+        background-color: #fff;
+        padding: 0 2px;
+      }
+    }
+
+    p {
+      font-size: 2rem;
+
+      span {
+        display: inline-block;
+        background-color: #fff;
+        padding: 0px 2px;
+        line-height: 120%;
+      }
+    }
+  }
+}
+
+//バックナンバー
+.backnumbers {
+  margin-left: 200px;
+  z-index: 20;
+
+  @include mq {
+    margin: 75px 0 0;
+  }
+
+  h2 {
+    font-weight: normal;
+    font-size: 12px;
+    padding: 24px 40px;
+    background: #f8f8f8;
+
+    &:first-line {
+      font-size: 22px;
+    }
+  }
+}
+
+.backnumbers ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+
+  li {
+    width: 50%;
+    padding: 40px 60px;
+
+    @include mq {
+      width: 100%;
+      padding: 30px 30px;
+    }
+  }
+
+  img {
+    display: block;
+    width: 65%;
+    margin: 10% auto;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.4);
+
+    @include mq {
+      width: 40%;
+      margin: 20px auto 30px;
+    }
+  }
+
+  time {
+    display: block;
+    margin-bottom: 6px;
+    line-height: 1.8;
+    font-size: 12px;
+  }
+  p {
+    font-weight: normal;
+    font-size: 18px;
+  }
+  
+}
+
+.No101 {
+  background: #ecf4f9;
+}
+.No100 {
+  background: #fbf3d2;
+}
+.No99 {
+  background: #f9f2eb;
+}
+.No98 {
+  background: #fae8c2;
+}
+.No97 {
+  background: #e2efe7;
+}
+.No96 {
+  background: #f2f5fb;
+}
